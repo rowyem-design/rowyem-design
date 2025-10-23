@@ -769,40 +769,55 @@ team section style start
    =================================================
    - يستهدف الشاشات الأصغر من 992 بكسل (الأجهزة اللوحية والجوال)
 */
-@media (max-width: 991.98px) {
-    /* (1) إصلاح أعمدة المهارات والتعليم */
-    /* نجعل أي عمود مُعرَّف بـ col-7 يشغل العرض الكامل (100%) على الجوال والأجهزة اللوحية الصغيرة */
-    .row .col-7 {
-        width: 100%;
-        /* إزالة أي إزاحة قد تكون مطبقة على الأعمدة */
-        margin-left: 0;
-        margin-right: 0;
+@media (max-width: 1200px) {
+    
+    /* (1) إلغاء الإزاحة (Offset) للعمود الرئيسي لضمان بداية المحتوى من الحافة */
+    .col-xl-6.offset-xl-2 {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    /* التأكد من أن padding الحاوية موجود */
+     .container.content-container {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
     }
     
-    /* (2) التأكد من محاذاة كل المحتوى إلى اليسار (أو اليمين حسب اللغة) على الجوال */
+    /* (2) إصلاح أعمدة المهارات والتعليم (القاعدة السابقة) */
+    .row .col-7,
+    .row .col-lg-7 {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    
+    /* (3) التأكد من محاذاة كل المحتوى إلى اليسار (أو اليمين حسب اللغة) على الجوال */
     .row.justify-content-start, 
     .row.justify-content-end {
-        /* إزالة المحاذاة الثابتة - يعتمد على إعدادات Bootstrap الأساسية */
         justify-content: flex-start !important; 
     }
 
-    /* (3) تحسين قسم الخدمات لتجنب التباعد الزائد */
+    /* (4) تحسين قسم الخدمات لتجنب التباعد الزائد */
     .col.d-flex.align-items-start.pb-5 {
         padding-bottom: 30px !important;
     }
 
-    /* (4) تحسين أزرار التنقل السفلية لتكون أكثر تناسقاً */
+    /* (5) تحسين أزرار التنقل السفلية لتكون أكثر تناسقاً */
     ul.nav.nav-pills {
         padding: 5px 0 !important;
     }
+    
+    /* (6) تعديل عرض قائمة الاتصال على الجوال */
+    .contact-list {
+        width: 100% !important; 
+        margin-bottom: 20px;
+    }
 }
 
-/* (5) تحسين عرض قائمة الاتصال على الأجهزة اللوحية المتوسطة (إذا لزم الأمر) */
+/* (7) عرض قائمة الاتصال على الأجهزة اللوحية المتوسطة */
 @media (min-width: 576px) and (max-width: 991.98px) {
     .col-12.col-md-4.contact-list {
-        /* يمكن وضع عنصرين في الصف على شاشات sm/md إذا كنت تفضل ذلك */
-        width: 48%; 
-        margin-left: 1%;
-        margin-right: 1%;
+        width: 48% !important; 
+        margin-left: 1% !important;
+        margin-right: 1% !important;
     }
 }
