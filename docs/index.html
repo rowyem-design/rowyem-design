@@ -47,7 +47,14 @@
             display: none !important;
         }
         
-        /* (2) تنسيق التذييل (Footer) - الآن يظهر على الكمبيوتر والجوال */
+        /* (2) الحل القسري والأخير لإخفاء زر العودة للأعلى (لتجاوز أي ملفات CSS أو JS خارجية) */
+        #back-to-top {
+            display: none !important;
+            visibility: hidden !important; 
+            opacity: 0 !important;
+        }
+
+        /* (3) تنسيق التذييل (Footer) - يظهر الآن على الكمبيوتر والجوال */
         footer {
             padding: 20px 0;
             margin-top: 50px;
@@ -56,7 +63,7 @@
             background-color: var(--secondary-color); 
         }
         
-        /* (3) التنسيقات الخاصة بالجوال (تجاوز الأولوية) */
+        /* (4) التنسيقات الخاصة بالجوال (تجاوز الأولوية) */
         @media (max-width: 1200px) {
             /* تعديل التذييل على الجوال: إضافة padding سفلي بسبب شريط التنقل الثابت */
             footer {
@@ -64,7 +71,7 @@
             }
         }
     </style>
-    </head>
+</head>
 
 <body data-bs-spy="scroll" data-bs-target="#navigation-bar" tabindex="0">
 
@@ -450,9 +457,6 @@
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js" defer></script>
 
     <script>
-        // ==========================================================
-        // تم تبسيط كود JavaScript ليحتوي فقط على تحديث السنة وتهيئة المكتبات
-        // ==========================================================
         document.addEventListener('DOMContentLoaded', function () {
             
             // 1. تحديث لعرض السنة الحالية
@@ -463,8 +467,6 @@
 
             // 2. تفعيل AOS
             AOS.init({});
-
-            // **تم حذف كود التحكم بزر العودة للأعلى بالكامل**
 
             // 3. (إذا كنت تستخدم Isotope): تهيئة مكتبة Isotope
             var grid = document.querySelector('.isotope-container');
