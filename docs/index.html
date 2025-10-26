@@ -459,15 +459,16 @@
                 currentYearElement.textContent = new Date().getFullYear();
             }
 
-            // 2. تفعيل AOS (الحفاظ على تأثيرات الحركة)
+            // 2. تفعيل AOS
             AOS.init({});
 
             // 3. تهيئة Isotope وعرض المزيد (Show More)
             var grid = document.querySelector('.isotope-container');
-            // تأكد من أن جميع العناصر مخفية مبدئياً عن طريق CSS (سيتم إضافتها في style.css)
             var items = Array.from(grid.querySelectorAll('.item'));
             var loadMoreBtn = document.getElementById('loadMoreBtn');
             var itemsPerLoad = 10; // عدد العناصر التي تظهر في كل مرة
+            var totalItems = items.length;
+            var initialItemCount = 10; // عدد العناصر التي تظهر مبدئياً
             var currentItemCount = 0;
             var iso;
 
@@ -492,30 +493,49 @@
                 }
 
                 // إخفاء زر "عرض المزيد" إذا لم تعد هناك صور متبقية
-                if (currentItemCount >= items.length) {
+                if (currentItemCount >= totalItems) {
                     loadMoreBtn.style.display = 'none';
-                } else {
-                    loadMoreBtn.style.display = 'block';
                 }
             }
-
+            
+            // تهيئة Isotope وتحميل الصور
             if (grid && typeof imagesLoaded !== 'undefined' && typeof Isotope !== 'undefined') {
                 var imgLoad = imagesLoaded(grid);
                 imgLoad.on('done', function() {
+                    
                     // تهيئة Isotope
                     iso = new Isotope(grid, {
                         itemSelector: '.item',
                         layoutMode: 'fitRows'
                     });
                     
-                    // تحميل الدفعة الأولى من الصور
-                    loadItems();
+                    // منطق إظهار الصور والزر:
+                    if (totalItems <= initialItemCount) {
+                        // إذا كانت الصور 10 أو أقل: اعرض كل شيء وأخفِ الزر
+                        items.forEach(function(item) {
+                            item.style.display = 'block';
+                        });
+                        currentItemCount = totalItems;
+                        loadMoreBtn.style.display = 'none';
+                    } else {
+                        // إذا كانت الصور أكثر من 10: اعرض الـ 10 الأولى واظهر الزر
+                        loadItems(); 
+                        loadMoreBtn.style.display = 'block';
+                    }
+                    
+                    if (iso) {
+                        iso.reloadItems();
+                        iso.layout();
+                    }
                     
                     AOS.refresh();
                 });
             } else {
-                 // إذا لم يتم تحميل Isotope (لسبب ما)، تأكد من عرض الدفعة الأولى
-                 loadItems();
+                 // كبديل إذا لم يتم تحميل Isotope: عرض كل العناصر الموجودة
+                 items.forEach(function(item) {
+                    item.style.display = 'block';
+                 });
+                 loadMoreBtn.style.display = 'none';
             }
 
             // ربط الزر بالدالة
