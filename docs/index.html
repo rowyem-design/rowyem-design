@@ -62,10 +62,18 @@
             justify-content: center;
             width: 50px;
             height: 50px;
+            /* الافتراضي: مخفي */
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
         }
+        
+        /* (2ب) فئة الإظهار عبر JS */
+        #back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
 
         /* (3) تنسيق التذييل (Footer) - إخفاؤه على الكمبيوتر افتراضياً */
         footer {
@@ -492,64 +500,73 @@
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js" defer></script>
 
     <script>
+        // ==========================================================
+        // كود تحكم بسيط وآمن (تم حذفه من الملف السابق لضمان عمل الصفحة)
+        // ==========================================================
         document.addEventListener('DOMContentLoaded', function () {
-            // تحديث لعرض السنة الحالية
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // 1. تحديث لعرض السنة الحالية
+            var currentYearElement = document.getElementById('currentYear');
+            if (currentYearElement) {
+                currentYearElement.textContent = new Date().getFullYear();
+            }
 
-            // ==========================================================
-            // كود تأخير ظهور زر الرجوع للأعلى حتى الوصول لأسفل الصفحة (التذييل)
-            // ==========================================================
+            // 2. تفعيل AOS
+            AOS.init({});
+
+            // 3. التحكم بزر العودة للأعلى
             var backToTopButton = document.getElementById('back-to-top');
             
-            window.addEventListener('scroll', function() {
-                var scrollPosition = window.pageYOffset;
-                var windowHeight = window.innerHeight;
-                var documentHeight = document.documentElement.scrollHeight;
-                
-                // تحديد النطاق: يظهر الزر عندما تكون المسافة المتبقية للتمرير أقل من 200 بكسل (أو بالقرب من النهاية)
-                var threshold = 200; 
+            // تحقق من وجود الزر قبل إضافة المستمع
+            if (backToTopButton) {
+                window.addEventListener('scroll', function() {
+                    // ارتفاع المستند بأكمله
+                    var documentHeight = document.documentElement.scrollHeight;
+                    // ارتفاع منطقة العرض (النافذة)
+                    var windowHeight = window.innerHeight;
+                    // موضع التمرير الحالي
+                    var scrollPosition = window.pageYOffset;
+                    
+                    // تحديد العتبة (Threshold): النقطة التي يظهر عندها الزر. سنستخدم 1500 بكسل من القاع
+                    // يمكن تغيير القيمة حسب طول الصفحة لديك.
+                    // للتجربة، سنظهر الزر فقط عندما تكون المسافة المتبقية أقل من 1500px 
+                    // إذا كنت تريد إظهاره عند **نهاية** الصفحة تمامًا (كالمطلوب)، يجب استخدام قيمة قريبة من الصفر.
+                    var distanceToBottom = documentHeight - (scrollPosition + windowHeight);
+                    var threshold = 500; // القيمة بالبكسل من قاع الصفحة
 
-                // شرط الإظهار: إذا كانت النافذة قريبة من النهاية 
-                if (scrollPosition + windowHeight >= documentHeight - threshold) {
-                    backToTopButton.classList.add('show');
-                } else {
-                    backToTopButton.classList.remove('show');
-                }
-            });
-            
-            // النقر على زر الرجوع للأعلى
-            backToTopButton.addEventListener('click', function(e) {
-                e.preventDefault();
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
+                    if (distanceToBottom < threshold) {
+                        backToTopButton.classList.add('show');
+                    } else {
+                        backToTopButton.classList.remove('show');
+                    }
                 });
-            });
-            // ==========================================================
+                
+                // النقر على زر الرجوع للأعلى
+                backToTopButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
 
 
+            // 4. (إذا كنت تستخدم Isotope): تهيئة مكتبة Isotope
             var grid = document.querySelector('.isotope-container');
-
-            // Initialize Isotope after images are loaded
-            var imgLoad = imagesLoaded(grid);
-
-            imgLoad.on('done', function() {
-                var iso = new Isotope(grid, {
-                    itemSelector: '.item',
-                    layoutMode: 'fitRows'
-                });
-                
-                AOS.init({});
-                
-                // تحديث AOS بعد تأخير بسيط لضمان حساب المواقع النهائية
-                setTimeout(function(){
+            if (grid && typeof imagesLoaded !== 'undefined' && typeof Isotope !== 'undefined') {
+                var imgLoad = imagesLoaded(grid);
+                imgLoad.on('done', function() {
+                    var iso = new Isotope(grid, {
+                        itemSelector: '.item',
+                        layoutMode: 'fitRows'
+                    });
                     AOS.refresh();
-                }, 50); 
-            });
-            
+                });
+            }
         });
 
-        // تحديث نهائي عند تحميل كل موارد الصفحة
+        // تحديث AOS نهائيًا لضمان ضبط أماكن الصور
         window.onload = function() {
              AOS.refresh();
         }
