@@ -460,7 +460,10 @@
             }
 
             // 2. تفعيل AOS
-            AOS.init({});
+            // (يجب أن يكون لديك وسم لملف AOS.js في ملفاتك ليتم تفعيله)
+            if (typeof AOS !== 'undefined') {
+                AOS.init({});
+            }
 
             // 3. تهيئة Isotope وعرض المزيد (Show More)
             var grid = document.querySelector('.isotope-container');
@@ -468,16 +471,35 @@
             var loadMoreBtn = document.getElementById('loadMoreBtn');
             var itemsPerLoad = 10; // عدد العناصر التي تظهر في كل مرة
             var totalItems = items.length;
-            var initialItemCount = 10; // عدد العناصر التي تظهر مبدئياً
             var currentItemCount = 0;
             var iso;
 
-            // إخفاء جميع العناصر مبدئياً
+            // إخفاء جميع العناصر مبدئياً عن طريق JavaScript
             items.forEach(function(item) {
                 item.style.display = 'none';
             });
 
-            function loadItems() {
+            function loadInitialItems() {
+                // نحدد عدد العناصر التي ستظهر في البداية (إما 10 أو كل العناصر إذا كانت أقل)
+                var initialDisplayCount = Math.min(totalItems, itemsPerLoad);
+
+                // إظهار الدفعة الأولى
+                for (let i = 0; i < initialDisplayCount; i++) {
+                    items[i].style.display = 'block';
+                }
+                
+                currentItemCount = initialDisplayCount;
+
+                // تحديث حالة زر "عرض المزيد"
+                // يظهر الزر فقط إذا كان العدد الكلي للصور أكبر من عدد الصور الابتدائية (10)
+                if (totalItems > initialDisplayCount) {
+                    loadMoreBtn.style.display = 'block';
+                } else {
+                    loadMoreBtn.style.display = 'none';
+                }
+            }
+
+            function loadMoreItems() {
                 var itemsToShow = items.slice(currentItemCount, currentItemCount + itemsPerLoad);
                 
                 itemsToShow.forEach(function(item) {
@@ -486,7 +508,7 @@
 
                 currentItemCount += itemsToShow.length;
 
-                // إعادة تهيئة Isotope بعد عرض العناصر
+                // تحديث Isotope
                 if (iso) {
                     iso.reloadItems();
                     iso.layout();
@@ -509,26 +531,16 @@
                         layoutMode: 'fitRows'
                     });
                     
-                    // منطق إظهار الصور والزر:
-                    if (totalItems <= initialItemCount) {
-                        // إذا كانت الصور 10 أو أقل: اعرض كل شيء وأخفِ الزر
-                        items.forEach(function(item) {
-                            item.style.display = 'block';
-                        });
-                        currentItemCount = totalItems;
-                        loadMoreBtn.style.display = 'none';
-                    } else {
-                        // إذا كانت الصور أكثر من 10: اعرض الـ 10 الأولى واظهر الزر
-                        loadItems(); 
-                        loadMoreBtn.style.display = 'block';
-                    }
+                    // تحميل الدفعة الابتدائية
+                    loadInitialItems();
                     
-                    if (iso) {
-                        iso.reloadItems();
-                        iso.layout();
-                    }
+                    // تحديث تخطيط Isotope بعد التحميل الأولي
+                    iso.reloadItems();
+                    iso.layout();
                     
-                    AOS.refresh();
+                    if (typeof AOS !== 'undefined') {
+                        AOS.refresh();
+                    }
                 });
             } else {
                  // كبديل إذا لم يتم تحميل Isotope: عرض كل العناصر الموجودة
@@ -538,13 +550,15 @@
                  loadMoreBtn.style.display = 'none';
             }
 
-            // ربط الزر بالدالة
-            loadMoreBtn.addEventListener('click', loadItems);
+            // ربط الزر بدالة التحميل الإضافي
+            loadMoreBtn.addEventListener('click', loadMoreItems);
         });
 
         // تحديث AOS نهائيًا لضمان ضبط أماكن الصور
         window.onload = function() {
-             AOS.refresh();
+             if (typeof AOS !== 'undefined') {
+                AOS.refresh();
+             }
         }
     </script>
 
