@@ -260,7 +260,8 @@ ul.nav.nav-pills {
 
 
 @media only screen and (max-width: 1200px) {
-
+  
+  /* ************** تعديلات شريط الأقسام السفلي ************** */
   section.navigation {
     z-index: 99999;
   }
@@ -276,8 +277,34 @@ ul.nav.nav-pills {
     display: flex;
     padding: 0px;
     justify-content: space-evenly;
+    /* التعديل: تحسين مظهر شريط التنقل السفلي */
+    background: #FFFFFF; 
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05); 
+    padding: 8px 0 !important; 
   }
 
+  /* تقليل حجم الأيقونات قليلاً على الجوال لتكون أكثر تناسقاً */
+  .nav a.nav-link {
+    font-size: 28px; 
+    padding: 10px 0; 
+  }
+  
+  /* التأكد من أن ul.nav.nav-pills لا تزال تعمل بشكل صحيح كتخطيط مرن */
+  ul.nav.nav-pills {
+      background: #FFFFFF;
+      display: flex; 
+      border-radius: 0px;
+      width: 100%; 
+      margin: 0 !important;
+  }
+  
+  .nav {
+      /* إزالة التباعد الكبير الذي يطبق على ul.nav في شاشة الكمبيوتر */
+      padding: 0px 0 !important;
+      --bs-nav-link-hover-color: var(--accent-color);
+      --bs-nav-link-active-color: var(--accent-color);
+  }
+  /* ********************************************************** */
 }
 
 
@@ -553,11 +580,21 @@ img {
 
 @media only screen and (max-width: 580px) {
 
+  /* ************** تعديل حجم صور المعرض على الجوال ************** */
   .item {
-    margin-left: 40px;
-
+    /* إلغاء الهامش الذي كان يسبب مشكلة محاذاة */
+    margin-left: 0px; 
+    /* تحديد عرض العنصر الحاوي للصورة لضبط حجمها */
+    width: 90%; 
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px; 
   }
 
+  img.portfolio-img {
+    width: 100%; 
+  }
+  /* ********************************************************** */
 }
 
 
@@ -802,6 +839,7 @@ team section style start
     }
 
     /* (5) تحسين أزرار التنقل السفلية لتكون أكثر تناسقاً */
+    /* **تم نقل التعديلات الأكثر تفصيلاً إلى استعلام @media 1200px في الأعلى** */
     ul.nav.nav-pills {
         padding: 5px 0 !important;
     }

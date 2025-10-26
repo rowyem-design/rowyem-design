@@ -123,7 +123,7 @@
                 </ul>
             </section>
             
-            <div class="col-xl-6 offset-xl-2">
+            <div class="col-12 col-xl-6 offset-xl-2">
                 
                 <div class="container content-container pt-5">
 
@@ -227,7 +227,7 @@
                             <h2 class="fw-bold pb-4" data-aos="fade-up" data-aos-duration="1000">My Skills</h2> 
                             
                             <div class="row justify-content-start" data-aos="fade-up" data-aos-duration="1000">
-                                <div class="col-7">
+                                <div class="col-12 col-lg-7">
                                     <div class="data-info ">
                                         <p class="meta-date">Advanced Skill <img src="images/Ellipse 7.png" alt="Small decorative circle" loading="lazy">
                                             <a class="open-description">Adobe Suite</a>
@@ -239,7 +239,7 @@
                             </div>
 
                             <div class="row justify-content-end" data-aos="fade-up" data-aos-duration="1000">
-                                <div class="col-7">
+                                <div class="col-12 col-lg-7">
                                     <div class="data-info  ">
                                         <p class="meta-date">Core Competency <img src="images/Ellipse 7.png" alt="Small decorative circle" loading="lazy">
                                             <a class="open-description">Vector Graphics</a>
@@ -251,7 +251,7 @@
                             </div>
 
                             <div class="row justify-content-start" data-aos="fade-up" data-aos-duration="1000">
-                                <div class="col-7">
+                                <div class="col-12 col-lg-7">
                                     <div class="data-info ">
                                         <p class="meta-date">Specialized Layout <img src="images/Ellipse 7.png" alt="Small decorative circle" loading="lazy">
                                             <a class="open-description">Print & Digital</a>
@@ -268,7 +268,7 @@
                             <h2 class="fw-bold pb-4">Education & Professional Certificates</h2>
 
                             <div class="row justify-content-start" data-aos="fade-up" data-aos-duration="1000">
-                                <div class="col-7">
+                                <div class="col-12 col-lg-7">
                                     <div class="data-info ">
                                         <p class="meta-date">2025 <img src="images/Ellipse 7.png" alt="Small decorative circle" loading="lazy">
                                             <a class="open-description">Al-Mamoun Institute - Damascus</a>
@@ -282,7 +282,7 @@
                             </div>
 
                             <div class="row justify-content-end" data-aos="fade-up" data-aos-duration="1000">
-                                <div class="col-7">
+                                <div class="col-12 col-lg-7">
                                     <div class="data-info  ">
                                         <p class="meta-date">2025 <img src="images/Ellipse 7.png" alt="Small decorative circle" loading="lazy">
                                             <a class="open-description">Al-Mamoun Institute - Damascus</a>
@@ -395,18 +395,18 @@
                         </div>
                         <hr class="mid-break my-2">
                         <div class="py-4 my-4" data-aos="fade-up" data-aos-duration="1000"> 
-                            <div class="row justify-content-around">
-                                <div class="col-md-4 contact-list" data-aos="fade-up" data-aos-duration="1000">
+                            <div class="row justify-content-center justify-content-md-around">
+                                <div class="col-12 col-md-4 contact-list" data-aos="fade-up" data-aos-duration="1000">
                                     <p class="contact-paragraph">
                                         <iconify-icon icon="ic:outline-phone" aria-label="Phone number"></iconify-icon> +963932401326
                                     </p>
                                 </div>
-                                <div class="col-md-4 contact-list" data-aos="fade-up" data-aos-duration="1000">
+                                <div class="col-12 col-md-4 contact-list" data-aos="fade-up" data-aos-duration="1000">
                                     <p class="contact-paragraph">
                                         <iconify-icon icon="ic:outline-email" aria-label="Email address"></iconify-icon> Available on contact form
                                     </p>
                                 </div>
-                                <div class="col-md-4 contact-list" data-aos="fade-up" data-aos-duration="1000">
+                                <div class="col-12 col-md-4 contact-list" data-aos="fade-up" data-aos-duration="1000">
                                     <p class="contact-paragraph">
                                         <iconify-icon icon="ic:outline-location-on" aria-label="Location"></iconify-icon> Syria,Damascus
                                         countryside
@@ -510,9 +510,14 @@
                     layoutMode: 'fitRows'
                 });
                 
-                // *** الحل المُعدَّل لضمان التزامن بين Isotope و AOS: ***
-                // 1. تشغيل AOS بعد انتهاء Isotope من التخطيط الأولي
-                AOS.init();
+                // *** الحل المُعدَّل لضمان التزامن بين Isotope و AOS وتفعيل AOS على الجوال: ***
+                // تم تعديل إعدادات AOS لمنع التعطيل الافتراضي على الأجهزة المحمولة.
+                AOS.init({
+                    disable: function() {
+                       return false; // تضمن أن AOS لن يتم تعطيله أبدًا بناءً على نوع الجهاز
+                    }, 
+                    once: true,
+                });
                 
                 // 2. تحديث AOS بعد تأخير بسيط (50 مللي ثانية) لضمان حساب المواقع النهائية لكافة العناصر
                 setTimeout(function(){
