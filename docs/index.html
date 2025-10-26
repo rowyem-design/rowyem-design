@@ -254,6 +254,7 @@
                         <hr class="mid-break my-2">
                         
                         </section>
+
                     <section id="portfolio">
                         <div class="py-4 my-4" data-aos="fade-up" data-aos-duration="1000"> <h1 class="fw-bold mt-5">Portfolio</h1>
                         </div>
@@ -261,7 +262,7 @@
                         <div class="py-4 my-4 ">
                             <div class="isotope-container">
                                 
-                                <div class="item uiux col-md-4" data-aos="fade-up" data-aos-duration="1000">
+                                <div class="item uiux col-12" data-aos="fade-up" data-aos-duration="1000">
                                     <a href="images/Shaving card.jpg" title="Shaving card" class="image-link">
                                         <img class="portfolio-img" src="images/Shaving card.jpg" alt="Boxed Water Packaging Design" loading="lazy">
                                         <div class="description">
@@ -270,7 +271,7 @@
                                     </a>
                                 </div>
                                 
-                                <div class="item branding col-md-4" data-aos="fade-up" data-aos-duration="1000">
+                                <div class="item branding col-12" data-aos="fade-up" data-aos-duration="1000">
                                     <a href="images/Paper envelope.jpg" title="Paper envelope" class="image-link">
                                         <img class="portfolio-img" src="images/Paper envelope.jpg" alt="Verve Coffee Branding Design" loading="lazy">
                                         <div class="description">
@@ -279,7 +280,7 @@
                                     </a>
                                 </div>
                                 
-                                <div class="item print col-md-4" data-aos="fade-up" data-aos-duration="1000">
+                                <div class="item print col-12" data-aos="fade-up" data-aos-duration="1000">
                                     <a href="images/Office flag.jpg" title="Office flag" class="image-link">
                                         <img class="portfolio-img" src="images/Office flag.jpg" alt="Children's T-shirt Print Design" loading="lazy">
                                         <div class="description">
@@ -288,7 +289,7 @@
                                     </a>
                                 </div>
                                 
-                                <div class="item print col-md-4" data-aos="fade-up" data-aos-duration="1000">
+                                <div class="item print col-12" data-aos="fade-up" data-aos-duration="1000">
                                     <a href="images/Cup.jpg" title="Cup" class="image-link">
                                         <img class="portfolio-img" src="images/Cup.jpg" alt="Tote Bag Print Design" loading="lazy">
                                         <div class="description">
@@ -297,7 +298,7 @@
                                     </a>
                                 </div>
                                 
-                                <div class="item uiux col-md-4" data-aos="fade-up" data-aos-duration="1000">
+                                <div class="item uiux col-12" data-aos="fade-up" data-aos-duration="1000">
                                     <a href="images/Bag.jpg" title="Bag" class="image-link">
                                         <img class="portfolio-img" src="images/Bag.jpg" alt="Box Packaging Design" loading="lazy">
                                         <div class="description">
@@ -306,7 +307,7 @@
                                     </a>
                                 </div>
                                 
-                                <div class="item print col-md-4" data-aos="fade-up" data-aos-duration="1000">
+                                <div class="item print col-12" data-aos="fade-up" data-aos-duration="1000">
                                     <a href="images/Hat.jpg" title="Hat" class="image-link">
                                         <img class="portfolio-img" src="images/Hat.jpg" alt="Coco Oil Bottle Label Design" loading="lazy">
                                         <div class="description">
@@ -315,7 +316,7 @@
                                     </a>
                                 </div>
                                 
-                                <div class="item print col-md-4" data-aos="fade-up" data-aos-duration="1000">
+                                <div class="item print col-12" data-aos="fade-up" data-aos-duration="1000">
                                     <a href="images/Key shape.jpg" title="Key shape" class="image-link">
                                         <img class="portfolio-img" src="images/Key shape.jpg" alt="Graphic T-shirt Design" loading="lazy">
                                         <div class="description">
@@ -324,7 +325,7 @@
                                     </a>
                                 </div>
                                 
-                                <div class="item branding col-md-4" data-aos="fade-up" data-aos-duration="1000">
+                                <div class="item branding col-12" data-aos="fade-up" data-aos-duration="1000">
                                     <a href="images/Book.jpg" title="Book" class="image-link">
                                         <img class="portfolio-img" src="images/Book.jpg" alt="Paper Cup Branding Design" loading="lazy">
                                         <div class="description">
@@ -333,7 +334,7 @@
                                     </a>
                                 </div>
                                 
-                                <div class="item print col-md-4" data-aos="fade-up" data-aos-duration="1000">
+                                <div class="item print col-12" data-aos="fade-up" data-aos-duration="1000">
                                     <a href="images/Bank card.jpg" title="Bank card" class="image-link">
                                         <img class="portfolio-img" src="images/Bank card.jpg" alt="Coffee Package Design" loading="lazy">
                                         <div class="description">
@@ -344,6 +345,7 @@
                             </div>
                         </div>
                     </section>
+                    
                     <section id="contact">
                         <div class="py-4 my-4" data-aos="fade-up" data-aos-duration="1000"> 
                             <h1 class="fw-bold mt-5">Contact</h1>
@@ -456,4 +458,34 @@
 
 </body>
 
-</html>
+</html>/* =======================================================
+   قواعد CSS القسرية - يجب إضافتها لملف style.css
+   ======================================================= */
+   
+/* (1) إخفاء أيقونة القائمة الجانبية (الثلاث شخطات) */
+.offcanvas-btn {
+    display: none !important;
+}
+
+/* (2) الحل القسري لـ #back-to-top لضمان إلغائه بالكامل */
+#back-to-top {
+    display: none !important;
+    visibility: hidden !important; 
+    opacity: 0 !important;
+}
+
+/* (3) تنسيق التذييل (Footer) لضمان ظهوره على الكمبيوتر */
+footer {
+    padding: 20px 0;
+    margin-top: 50px;
+    display: block; /* لضمان ظهوره على الكمبيوتر */
+    text-align: center;
+    background-color: var(--secondary-color); 
+}
+
+/* (4) تعديل التذييل على الجوال: إضافة padding سفلي بسبب شريط التنقل الثابت */
+@media (max-width: 1200px) {
+    footer {
+        padding-bottom: 90px !important; 
+    }
+}
