@@ -468,7 +468,7 @@
         crossorigin="anonymous" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.7/dist/iconify-icon.min.js" defer></script>
-    <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script> 
     
     <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js" defer></script>
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js" defer></script>
@@ -511,12 +511,9 @@
                 });
                 
                 // *** الحل المُعدَّل لضمان التزامن بين Isotope و AOS وتفعيل AOS على الجوال: ***
-                // تم تعديل إعدادات AOS لمنع التعطيل الافتراضي على الأجهزة المحمولة.
                 AOS.init({
-                    disable: function() {
-                       return false; // تضمن أن AOS لن يتم تعطيله أبدًا بناءً على نوع الجهاز
-                    }, 
-                    once: true,
+                    // يتم إزالة خيار التعطيل هنا، مما يجعله يعمل بشكل افتراضي على كلا الشاشتين
+                    // في حال لم يعمل على الجوال، يمكن إعادة تجربة الإعداد السابق: disable: 'phone'
                 });
                 
                 // 2. تحديث AOS بعد تأخير بسيط (50 مللي ثانية) لضمان حساب المواقع النهائية لكافة العناصر
