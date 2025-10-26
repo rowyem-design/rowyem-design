@@ -578,6 +578,18 @@ img {
   transform: translateY(-100px);
 }
 
+/* التعديل 1: تصغير صور البورتفوليو على شاشة الكمبيوتر فقط */
+@media (min-width: 1201px) {
+    .isotope-container .item {
+        /* تصغير عرض العنصر الحاوي للصورة على الشاشات الكبيرة */
+        width: 80% !important; 
+        /* توسيط العنصر */
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+
 @media only screen and (max-width: 580px) {
 
   /* ************** تعديل حجم صور المعرض على الجوال ************** */
@@ -821,4 +833,15 @@ team section style start
         margin-left: 0 !important;
         margin-right: 0 !important;
     }
+}
+
+/* *************************************************
+   ** التعديل 2: إظهار التذييل على جميع الشاشات (الجوال والكمبيوتر) **
+   *************************************************
+*/
+footer {
+    display: block !important; /* تأكد من أنه مرئي دائمًا */
+    padding: 20px 0; /* إضافة تباعد للحفاظ على المظهر */
+    margin-top: 50px; /* فصله عن المحتوى أعلاه */
+    width: 100%;
 }
