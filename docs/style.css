@@ -878,4 +878,46 @@ footer {
     footer {
         margin-bottom: 70px; /* تباعد كافي ليتجنب شريط الأقسام الثابت في الأسفل */
     }
+}/*
+   =================================================
+   ** الإصلاح النهائي لإظهار التذييل على الجوال (Mobile Footer Fix) **
+   =================================================
+*/
+
+@media (max-width: 1200px) {
+    /* 1. إجبار التذييل على الظهور وتجاوز أي إخفاء محتمل */
+    footer {
+        /* الأولوية القصوى لضمان العرض */
+        display: block !important; 
+        
+        /* ضبط الوضعية لضمان عدم تأثير العناصر الأخرى عليه */
+        position: relative !important; 
+        
+        /* إزالة أي إزاحة أو تنسيقات وضعية قد تكون موجودة */
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        
+        /* ضمان الترتيب الطبقي لإظهاره فوق باقي المحتوى */
+        z-index: 1000 !important; 
+        
+        /* ملء العرض بالكامل */
+        width: 100% !important;
+        
+        /* إضافة خلفية صلبة */
+        background-color: var(--secondary-color) !important; 
+        
+        /* تباعد كافٍ من الأسفل لمنع التداخل مع شريط التنقل السفلي */
+        padding-bottom: 70px !important; 
+        padding-top: 20px !important;
+    }
+    
+    /* 2. ضمان ظهور نص حقوق النشر نفسه */
+    footer p {
+        display: block !important;
+        font-size: 14px !important; /* حجم مناسب للجوال */
+        color: var(--light-text-color) !important;
+        margin: 0 !important;
+        text-align: center !important;
+    }
 }
