@@ -844,38 +844,32 @@ footer {
     padding: 20px 0; /* إضافة تباعد للحفاظ على المظهر */
     margin-top: 50px; /* فصله عن المحتوى أعلاه */
     width: 100%;
-}/*
+}
+
+/*
    =================================================
    ** الإصلاح النهائي لإظهار التذييل على الجوال (Mobile Footer Fix) **
+   ** التعديل الأخير: تم رفع التذييل إلى 95px كما طلبت **
    =================================================
 */
 
 @media (max-width: 1200px) {
-    /* 1. إجبار التذييل على الظهور وتجاوز أي إخفاء محتمل */
+    /* 1. ضبط التذييل (Footer) نفسه */
     footer {
-        /* الأولوية القصوى لضمان العرض */
-        display: block !important; 
+        /* تقليل الهامش العلوي الفاصل عن المحتوى */
+        margin-top: 30px !important; 
+        /* تقليل التباعد الداخلي العلوي والسفلي */
+        padding: 10px 0 !important;  
         
-        /* ضبط الوضعية لضمان عدم تأثير العناصر الأخرى عليه */
+        /* التعديل: زيادة التباعد السفلي لرفع التذييل أكثر */
+        padding-bottom: 95px !important; /* القيمة الجديدة لرفعه أكثر */
+        
+        /* التأكد من عرض التذييل دائماً وبشكل صحيح */
         position: relative !important; 
-        
-        /* إزالة أي إزاحة أو تنسيقات وضعية قد تكون موجودة */
-        left: 0 !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        
-        /* ضمان الترتيب الطبقي لإظهاره فوق باقي المحتوى */
-        z-index: 1000 !important; 
-        
-        /* ملء العرض بالكامل */
+        display: block !important;
         width: 100% !important;
-        
-        /* إضافة خلفية صلبة */
-        background-color: var(--secondary-color) !important; 
-        
-        /* تباعد كافٍ من الأسفل لمنع التداخل مع شريط التنقل السفلي */
-        padding-bottom: 70px !important; 
-        padding-top: 20px !important;
+        background-color: var(--secondary-color) !important;
+        z-index: 1000 !important;
     }
     
     /* 2. ضمان ظهور نص حقوق النشر نفسه */
@@ -885,40 +879,6 @@ footer {
         color: var(--light-text-color) !important;
         margin: 0 !important;
         text-align: center !important;
-    }
-}/*
-   =================================================
-   ** التعديلات المقترحة لضبط التذييل في شاشة الجوال (لحل مشكلة الفراغ السفلي) **
-   =================================================
-*/
-
-@media (max-width: 1200px) {
-    
-    /* 1. ضبط التذييل (Footer) نفسه */
-    footer {
-        /* إزالة الهامش العلوي الزائد وتقليل التباعد الداخلي */
-        margin-top: 30px !important; /* تقليل الهامش العلوي الفاصل عن المحتوى */
-        padding: 10px 0 !important;  /* تقليل التباعد الداخلي العلوي والسفلي */
-        
-        /* تباعد كافٍ من الأسفل لمنع التداخل مع شريط التنقل السفلي الثابت */
-        /* شريط التنقل السفلي لديك حجمه تقريبًا 60-70 بكسل، لذا نستخدم 75 بكسل */
-        padding-bottom: 75px !important; 
-        
-        /* التأكد من عرض التذييل دائماً وبشكل صحيح */
-        position: relative !important; 
-        display: block !important;
-        width: 100% !important;
-    }
-    
-    /* 2. ضبط نص حقوق النشر داخل التذييل */
-    footer p {
-        /* تقليل أي تباعد داخلي غير ضروري للنص */
-        margin: 0 !important; 
-        /* جعل حجم الخط أصغر قليلاً لمزيد من التناسق على الجوال */
-        font-size: 14px !important; 
-        /* استخدام خط Nunito Sans ليتناسق مع نصوص الموقع */
         font-family: 'Nunito Sans', sans-serif !important; 
-        /* التأكد من لون النص */
-        color: var(--light-text-color) !important;
     }
 }
